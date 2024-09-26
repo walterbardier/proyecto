@@ -1,8 +1,8 @@
 -- Creación de la base de datos
-CREATE DATABASE IF NOT EXISTS central_opiniones;
+CREATE DATABASE IF NOT EXISTS proyecto2024;
 
 -- Usar la base de datos creada
-USE central_opiniones;
+USE proyecto2024;
 
 -- Creación de la tabla de usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS administradores (
 CREATE TABLE IF NOT EXISTS preguntas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
+    ciudad TEXT NOT NULL,
     texto_pregunta TEXT NOT NULL,
     estado ENUM('pendiente', 'respondida') DEFAULT 'pendiente',
     creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
