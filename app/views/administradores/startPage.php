@@ -19,13 +19,10 @@ require_once '../../controllers/QuejaController.php';
     
     <link rel="stylesheet" href="../usuarios/assets/css/leadmark.css?v=<?php echo(rand()); ?>" />
     <!-- <script src="/js/mi_script.js?v=<?php echo(rand()); ?>"></script> -->
-     
-
 
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     
-
     <!-- page Navigation -->
     <nav class="navbar custom-navbar navbar-expand-md navbar-light fixed-top" data-spy="affix" data-offset-top="10">
         <div class="container">
@@ -72,13 +69,9 @@ require_once '../../controllers/QuejaController.php';
         <div class="overlay">
             <!-- <h1 class="title">pre-proyecto</h1>  
             <h1 class="subtitle">POO: parte II</h1> -->
-
             <h1>Bienvenido, <?php echo $_SESSION['usuario']['username']; ?></h1>
             <p>Sistema de gestión de preguntas ciudadanas.</p>
-
             <hr><hr><hr><hr>
-
-
 
         </div>  
         <div class="shape">
@@ -106,12 +99,63 @@ require_once '../../controllers/QuejaController.php';
                     <?php
                         require_once '../../controllers/QuejaController.php';
 
-                        // Instancia
-                        $QuejaController = new QuejaController();
+                        // // Instancia
+                        // $QuejaController = new QuejaController();
 
-                        // Listar quejas
-                        $QuejaController->index();
-                    ?>        
+                        // // Listar quejas
+                        // $QuejaController->index();
+                    ?>
+                    
+                    <h1>Buscar preguntas pendientes por categoría</h1>
+                    <form action="startPage.php" method="GET">
+                        <label for="categoria">Selecciona una categoría:</label>
+                        <select name="categoria" id="categoria">
+                            <option value="A">Categoría A</option>
+                            <option value="B">Categoría B</option>
+                            <option value="C">Categoría C</option>
+                        </select>
+                        <input type="submit" value="Buscar">
+                    </form>
+
+                    <hr>
+
+                    <?php
+                    require_once("../../models/ConexionModel.php");
+                    $conn = ConexionModel::getInstance()->getDatabaseInstance();
+
+                    // Verificar si se ha seleccionado una categoría
+                    if (isset($_GET['categoria'])) {
+                        $categoria_seleccionada = $_GET['categoria'];
+
+                        // Consulta para obtener las preguntas en estado 'pendiente' según la categoría seleccionada
+                        $consulta = $conn->prepare("
+                            SELECT p.id, p.texto_pregunta, p.creado_en, p.actualizado_en 
+                            FROM preguntas p
+                            JOIN relacion_pregunta_categoria rpc ON p.id = rpc.id_pregunta
+                            JOIN categorias_preguntas cp ON rpc.id_categoria = cp.id
+                            WHERE p.estado = 'pendiente' AND cp.nombre_categoria = :categoria
+                        ");
+                        $consulta->execute([":categoria" => $categoria_seleccionada]);
+
+                        $resultados = $consulta->fetchAll();
+
+                        if ($resultados) {
+                            foreach ($resultados as $resultado) {
+                                echo "<div>";
+                                echo "<b>Pregunta: </b>" . $resultado['texto_pregunta'] . "<br>";
+                                echo "<b>Creada en: </b>" . $resultado['creado_en'] . "<br>";
+                                echo "<b>Actualizada en: </b>" . $resultado['actualizado_en'] . "<br>";
+                                echo "<hr>";
+                                echo "</div>";
+                            }
+                        } else {
+                            echo "<p>No se encontraron preguntas pendientes para la categoría seleccionada.</p>";
+                        }
+                    } else {
+                        echo "<p>Por favor, selecciona una categoría para buscar preguntas pendientes.</p>";
+                    }
+                    ?>
+
                 </div>
 
                 <!-- Sección derecha: fotos e info -->
