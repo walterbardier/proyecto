@@ -23,7 +23,6 @@ session_start();
 
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-    
 
     <!-- page Navigation -->
     <nav class="navbar custom-navbar navbar-expand-md navbar-light fixed-top" data-spy="affix" data-offset-top="10">
@@ -88,13 +87,34 @@ session_start();
                         <input type="text" class="form-control text-white rounded-0 bg-transparent" id="nombre_usuario" name="nombre_usuario" value="<?php echo $_SESSION['usuario']['username']; ?>" readonly>
                         <!-- Con value carga el dato de usuario por POST -->
                     </div>
-                    <div class="form-group col-sm-8">
+                    <div class="form-group col-sm-4">
                         <select class="form-control" id="ciudad" name="ciudad">
                             <option>Fray Bentos</option>
                             <option>Young</option>
                             <option>Nuevo Berlín</option>
                             <option>San Javier</option>
                         </select>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <select class="form-control" id="categoria" name="categoria">
+                            <option value="Alumbrado">Alumbrado</option>
+                            <option value="Arbolado">Arbolado</option>
+                            <option value="Plantacion">Plantación</option>
+                            <option value="Acoso sexual">Acoso sexual</option>
+                            <option value="Limpieza de grafittis">Limpieza de grafittis</option>
+                            <option value="Estado de los contenedores">Estado de los contenedores</option>
+                            <option value="Problema de limpieza">Problema de limpieza</option>
+                            <option value="Solicitud de poda, escombros o residuos">Solicitud de poda, escombros o residuos</option>
+                            <option value="Saneamiento: Bocas de tormenta">Saneamiento: Bocas de tormenta</option>
+                            <option value="Saneamiento: Conexiones y Colectores">Saneamiento: Conexiones y Colectores</option>
+                            <option value="Tránsito: Semáforos">Tránsito: Semáforos</option>
+                            <option value="Tránsito: Señalización">Tránsito: Señalización</option>
+                            <option value="Quejas">Quejas</option>
+                            <option value="Consultas: Trámite">Consultas: Trámite</option>
+                            <option value="Consultas: Tributo">Consultas: Tributo</option>
+                            <option value="Consultas: Otro">Consultas: Otro</option>
+                        </select>
+
                     </div>
                     <div class="form-group col-12">
                         <textarea name="texto_pregunta" id="texto_pregunta" cols="30" rows="4" class="form-control text-white rounded-0 bg-transparent" placeholder="Mensaje"></textarea>

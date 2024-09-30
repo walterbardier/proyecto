@@ -82,7 +82,7 @@ hr {
   overflow: visible;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, h7, h8 {
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
@@ -368,8 +368,8 @@ template {
   display: none !important;
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1, h2, h3, h4, h5, h6, h7, h8
+.h1, .h2, .h3, .h4, .h5, .h6, h7, h8 {
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
@@ -397,6 +397,16 @@ h5, .h5 {
 
 h6, .h6 {
   font-size: 1rem;
+}
+
+h7, .h7 {
+  font-size: 1rem;
+  color: rgb(48, 147, 48);
+}
+
+h8, .h8 {
+  font-size: 1rem;
+  color: rgb(60, 60, 60);
 }
 
 .lead {
@@ -2758,7 +2768,7 @@ textarea.form-control {
 
 .btn:focus, .btn.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(255, 110, 66, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(66, 88, 255, 0.25);
 }
 
 .btn.disabled, .btn:disabled {
@@ -2778,12 +2788,12 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #ff511c;
+  background-color: #2d4191;
   border-color: #2d4191;
 }
 
 .btn-primary:focus, .btn-primary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 132, 94, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(66, 88, 255, 0.25);
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
@@ -2801,7 +2811,7 @@ fieldset:disabled a.btn {
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 132, 94, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(66, 88, 255, 0.25);
 }
 
 .btn-secondary {
@@ -3054,7 +3064,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary:focus, .btn-outline-primary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 110, 66, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(66, 88, 255, 0.25);
 }
 
 .btn-outline-primary.disabled, .btn-outline-primary:disabled {
@@ -3071,7 +3081,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 110, 66, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(66, 88, 255, 0.25);
 }
 
 .btn-outline-secondary {
@@ -4083,11 +4093,11 @@ input[type="button"].btn-block {
 }
 
 .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(255, 110, 66, 0.5);
+  background-color: rgba(66, 88, 255, 0.25);
 }
 
 .custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
-  background-color: rgba(255, 110, 66, 0.5);
+  background-color: rgba(66, 88, 255, 0.25);
 }
 
 .custom-radio .custom-control-label::before {
@@ -4099,7 +4109,7 @@ input[type="button"].btn-block {
 }
 
 .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(255, 110, 66, 0.5);
+  background-color: rgba(66, 88, 255, 0.25);
 }
 
 .custom-switch {
@@ -4141,7 +4151,7 @@ input[type="button"].btn-block {
 }
 
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(255, 110, 66, 0.5);
+  background-color: rgba(66, 88, 255, 0.25);
 }
 
 .custom-select {
@@ -5507,7 +5517,7 @@ a.badge-primary:hover, a.badge-primary:focus {
 
 a.badge-primary:focus, a.badge-primary.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(255, 110, 66, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(66, 88, 255, 0.25);
 }
 
 .badge-secondary {
@@ -11315,7 +11325,7 @@ textarea.form-control {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ff5a29;
+  background: #2d4191;
   border-radius: 20px;
 }
 
@@ -11420,9 +11430,10 @@ textarea.form-control {
 
 .header {
   position: relative;
-  height: 100vh;
-  min-height: 500px;
-  background: url(../../../public/imgs/fondo2.png) no-repeat center center fixed;
+  /* para cambiar el tamaño del header */
+  height: 0vh;
+  min-height: 400px;
+  background: url(../../../../../public/imgs/fondo2.png) no-repeat center center fixed;
   background-size: cover;
   overflow: hidden;
 }
@@ -11623,7 +11634,7 @@ textarea.form-control {
 
 .section.has-img-bg {
   position: relative;
-  background: url(../imgs/section.jpg) no-repeat center top fixed;
+  background: url(../imgs/headeraqua4.jpg) no-repeat center top fixed;
   background-size: cover;
   color: #fff;
 }

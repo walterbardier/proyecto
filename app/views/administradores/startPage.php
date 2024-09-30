@@ -15,9 +15,9 @@ require_once '../../controllers/QuejaController.php';
     <!-- font icons -->
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + LeadMark main styles -->
-	<link rel="stylesheet" href="../usuarios/assets/css/leadmark.css?v=<?php echo(rand()); ?>">
+	<link rel="stylesheet" href="assets/css/leadmark.css?v=<?php echo(rand()); ?>">
     
-    <link rel="stylesheet" href="../usuarios/assets/css/leadmark.css?v=<?php echo(rand()); ?>" />
+    <link rel="stylesheet" href="assets/css/leadmark.css?v=<?php echo(rand()); ?>" />
     <!-- <script src="/js/mi_script.js?v=<?php echo(rand()); ?>"></script> -->
 
 </head>
@@ -94,7 +94,7 @@ require_once '../../controllers/QuejaController.php';
                     <h6 class="section-title mb-0">Últimas preguntas pendientes</h6>
                     <h6 class="section-subtitle mb-4">Ordenadas por categoría.</h6>
                     <br>
-                    <input type="checkbox" name="" id="para javascript">
+                    
 
                     <?php
                         require_once '../../controllers/QuejaController.php';
@@ -106,18 +106,39 @@ require_once '../../controllers/QuejaController.php';
                         // $QuejaController->index();
                     ?>
                     
-                    <h1>Buscar preguntas pendientes por categoría</h1>
+                    
                     <form action="startPage.php" method="GET">
-                        <label for="categoria">Selecciona una categoría:</label>
-                        <select name="categoria" id="categoria">
-                            <option value="A">Categoría A</option>
-                            <option value="B">Categoría B</option>
-                            <option value="C">Categoría C</option>
-                        </select>
-                        <input type="submit" value="Buscar">
+                        <!-- <label for="categoria">Selecciona una categoría:</label> -->
+                        <div class="form-group col-sm-0">
+                            <select class="form-control" id="categoria" name="categoria">
+                                <option value="Alumbrado">Alumbrado</option>
+                                <option value="Arbolado">Arbolado</option>
+                                <option value="Plantacion">Plantación</option>
+                                <option value="Acoso sexual">Acoso sexual</option>
+                                <option value="Limpieza de grafittis">Limpieza de grafittis</option>
+                                <option value="Estado de los contenedores">Estado de los contenedores</option>
+                                <option value="Problema de limpieza">Problema de limpieza</option>
+                                <option value="Solicitud de retiro de poda, escombros o residuos">Solicitud de poda, escombros o residuos</option>
+                                <option value="Saneamiento: Bocas de tormenta">Saneamiento: Bocas de tormenta</option>
+                                <option value="Saneamiento: Conexiones y Colectores">Saneamiento: Conexiones y Colectores</option>
+                                <option value="Tránsito: Semáforos">Tránsito: Semáforos</option>
+                                <option value="Tránsito: Señalización">Tránsito: Señalización</option>
+                                <option value="Quejas">Quejas</option>
+                                <option value="Consultas: Trámite">Consultas: Trámite</option>
+                                <option value="Consultas: Tributo">Consultas: Tributo</option>
+                                <option value="Consultas: Otro">Consultas: Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group col-sm-0">
+                            <input class="btn btn-primary rounded w-md mt-3" type="submit" value="Buscar">
+                        </div>
+                        
                     </form>
+                    
 
-                    <hr>
+                    
+                    <br><br>
 
                     <?php
                     require_once("../../models/ConexionModel.php");
@@ -138,15 +159,31 @@ require_once '../../controllers/QuejaController.php';
                         $consulta->execute([":categoria" => $categoria_seleccionada]);
 
                         $resultados = $consulta->fetchAll();
+                        
+                        echo "<p>Resultados de la categoría: </p> <p><b>" . $categoria_seleccionada . "</b></p>" ;
+                        echo "<br>";
 
                         if ($resultados) {
                             foreach ($resultados as $resultado) {
+                                // echo "<input type='checkbox' name='' id='para javascript'>";
+                                echo "<br>";
                                 echo "<div>";
                                 echo "<b>Pregunta: </b>" . $resultado['texto_pregunta'] . "<br>";
                                 echo "<b>Creada en: </b>" . $resultado['creado_en'] . "<br>";
-                                echo "<b>Actualizada en: </b>" . $resultado['actualizado_en'] . "<br>";
-                                echo "<hr>";
+                                // echo "<b>Actualizada en: </b>" . $resultado['actualizado_en'] . "<br>";
                                 echo "</div>";
+                                echo "<br>";
+
+                                foreach ($resultados as $resultado) {
+                                    echo "<div class='pregunta'>";
+                                    // Botón para responder la pregunta
+                                    echo "<form action='responderPregunta.php' method='GET'>";
+                                    echo "<input type='hidden' name='id_pregunta' value='" . $resultado['id'] . "'>";
+                                    echo "<button type='submit' class='btn btn-info '>Responder</button>";
+                                    echo "</form>";
+                                    echo "</div>";
+                                }
+                                echo "<hr>";
                             }
                         } else {
                             echo "<p>No se encontraron preguntas pendientes para la categoría seleccionada.</p>";

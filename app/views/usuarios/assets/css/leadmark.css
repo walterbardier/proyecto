@@ -11430,8 +11430,9 @@ textarea.form-control {
 
 .header {
   position: relative;
+  /* para cambiar el tamaño del header */
   height: 100vh;
-  min-height: 500px;
+  min-height: 400px;
   background: url(../../../../../public/imgs/fondo2.png) no-repeat center center fixed;
   background-size: cover;
   overflow: hidden;

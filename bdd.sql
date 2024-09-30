@@ -68,3 +68,24 @@ CREATE TABLE IF NOT EXISTS relacion_pregunta_categoria (
     FOREIGN KEY (id_pregunta) REFERENCES preguntas(id),
     FOREIGN KEY (id_categoria) REFERENCES categorias_preguntas(id)
 );
+
+
+
+-- Insertar las categorías
+INSERT INTO categorias_preguntas (nombre_categoria) VALUES
+('Alumbrado'),
+('Arbolado'),
+('Plantacion'),
+('Acoso sexual'),
+('Limpieza de grafittis'),
+('Estado de los contenedores'),
+('Problema de limpieza'),
+('Solicitud de retiro de poda, escombros o residuos'),
+('Saneamiento: Bocas de tormenta'),
+('Saneamiento: Conexiones y Colectores'),
+('Tránsito: Semáforos'),
+('Tránsito: Señalización'),
+('Quejas'),
+('Consultas: Trámite'),
+('Consultas: Tributo'),
+('Consultas: Otro');

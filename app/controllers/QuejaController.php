@@ -11,6 +11,7 @@ require_once("../../models/ConexionModel.php");
  * update: actualiza el recurso dentro de la base de datos.
  * destroy: elimina un recurso.
  */
+
 class QuejaController
 {
     private $conn;
@@ -20,7 +21,7 @@ class QuejaController
         $this->conn = ConexionModel::getInstance()->getDatabaseInstance();
     }
 
-    // listar estudiantes 
+    // listar preguntas 
     public function index(){
         $consulta = $this->conn->prepare("SELECT * from preguntas;");
         $consulta->execute();
@@ -47,7 +48,7 @@ class QuejaController
         }
     }
 
-    // lListar quejas / preguntas
+    // lListar preguntas v2
     public function index2(){
         $id_usuario = $_SESSION['usuario']['id_usuario'];
         $consulta = $this->conn->prepare("SELECT * FROM preguntas WHERE id_usuario = :id_usuario;");

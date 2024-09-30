@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <?php
+    <?php
         session_start();
 
         if (!isset($_SESSION['usuario']['username'])) {
@@ -56,6 +56,7 @@
 
             // Obtén los datos del formulario
             $ciudad = $_POST['ciudad'];
+            $categoria = $_POST['categoria']; // Nueva línea para obtener la categoría
             $texto_pregunta = $_POST['texto_pregunta'];
 
             // Verifica si la pregunta ya existe
@@ -80,25 +81,43 @@
                 </div>
                 ";
             } else {
-                // Inserta la nueva pregunta en la base de datos
+                // Inserta la nueva pregunta en la tabla preguntas
                 $stmt = $pdo->prepare("INSERT INTO preguntas (id_usuario, ciudad, texto_pregunta) VALUES (?, ?, ?)");
                 $stmt->execute([$id_usuario, $ciudad, $texto_pregunta]);
+                
+                // Obtén el id de la pregunta recién insertada
+                $id_pregunta = $pdo->lastInsertId();
 
-                echo "
-                <br><br><br>
-                <div class='col'>
-                    <form>
-                        <div class='form-row'>
-                            <div class='form-group col-12'>
-                                <h4><b>¡Pregunta enviada con éxito!</b></h4>
-                            </div>
-                            <div class='form-group col-12 mb-0'>
-                                <a href='../views/usuarios/startPage.php'><button class='btn btn-primary rounded' input type='button' name='volver'>Volver atrás</button></a>
+                // Obtén el id de la categoría seleccionada
+                $stmt = $pdo->prepare("SELECT id FROM categorias_preguntas WHERE nombre_categoria = ?");
+                $stmt->execute([$categoria]);
+                $categoria_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($categoria_data) {
+                    $id_categoria = $categoria_data['id'];
+
+                    // Inserta la relación entre la pregunta y la categoría
+                    $stmt = $pdo->prepare("INSERT INTO relacion_pregunta_categoria (id_pregunta, id_categoria) VALUES (?, ?)");
+                    $stmt->execute([$id_pregunta, $id_categoria]);
+
+                    echo "
+                    <br><br><br>
+                    <div class='col'>
+                        <form>
+                            <div class='form-row'>
+                                <div class='form-group col-12'>
+                                    <h4><b>¡Pregunta enviada con éxito!</b></h4>
+                                </div>
+                                <div class='form-group col-12 mb-0'>
+                                    <a href='../views/usuarios/startPage.php'><button class='btn btn-primary rounded' input type='button' name='volver'>Volver atrás</button></a>
+                                </div>                          
                             </div>                          
-                        </div>                          
-                    </form>
-                </div>
-                ";
+                        </form>
+                    </div>
+                    ";
+                } else {
+                    echo "<p>Error: Categoría no encontrada.</p>";
+                }
             }
 
         } catch (PDOException $e) {

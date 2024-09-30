@@ -12,6 +12,7 @@ require_once("../models/ConexionModel.php");
  * update: actualiza el recurso dentro de la base de datos.
  * destroy: elimina un recurso.
  */
+
 class LoginController
 {
     private $conn;
