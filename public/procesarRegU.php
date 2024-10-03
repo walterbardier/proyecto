@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" type="text/css">
-    <title>¡Usuario registrado! | RÍO NEGRO CONECTADO</title>
+    <title>Registro de usuario | RÍO NEGRO CONECTADO</title>
 
     <!-- font icons -->
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
@@ -20,8 +20,6 @@
 
     <?php
 
-
-
         $conexion = new mysqli("localhost","root","","proyecto2024");
 
         // Obtener datos del formulario
@@ -33,12 +31,12 @@
         $fecha_nacimiento = $_POST['fecha_nacimiento'];
         // $numero_telefono = $_POST['numero_telefono'];
 
-        // Verificar si el estudiante ya existe
+        // Verificar si el usuario ya existe
         $sql_verificar = "SELECT * FROM usuarios WHERE nombre_usuario = '$nombre_usuario'";
         $result_verificar = $conexion->query($sql_verificar);
 
         if ($result_verificar->num_rows > 0) {
-            // El estudiante ya existe, notificar
+            // El usuario ya existe, notificar
             echo "
             
             <br><br><br>
@@ -46,7 +44,7 @@
                     <form>
                         <div class='form-row'>
                             <div class='form-group col-12'>
-                                <h4><b>Ya existe el Estudiante:</b></h4>
+                                <h4><b>Ya existe el usuario:</b></h4>
                                 <br>
                                 <h6><b>Nombre: </b>$nombre_usuario</h6>
                             </div>
@@ -59,7 +57,7 @@
                 
                 ";
         } else {
-            // El estudiante no existe, registrar
+            // El usuario no existe, registrar
             $sql_insertar = "INSERT INTO usuarios (nombre_usuario, correo_electronico, contrasena, fecha_nacimiento)
             VALUES ('$nombre_usuario', '$correo_electronico', '$contrasena', '$fecha_nacimiento')";
 
@@ -71,7 +69,7 @@
                     <form>
                         <div class='form-row'>
                             <div class='form-group col-12'>
-                                <h4><b>Se ha registrado al Estudiante:</b></h4>
+                                <h4><b>Se ha registrado al usuario:</b></h4>
                                 <br>
                                 <h6><b>Nombre: </b>$nombre_usuario</h6>
                             </div>
@@ -84,7 +82,7 @@
                 
                 ";
             } else {
-                echo "Error al registrar estudiante: " . $conexion->error;
+                echo "Error al registrar usuario: " . $conexion->error;
             }
         }
 

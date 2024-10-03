@@ -10,6 +10,7 @@
     <!-- Bootstrap + LeadMark main styles -->
     <link rel="stylesheet" href="../views/usuarios/assets/css/leadmark.css?v=<?php echo(rand()); ?>">
 </head>
+
 <body>
     <div class="container">
         <?php

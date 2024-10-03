@@ -51,7 +51,7 @@ session_start();
                         <a><img src="../../../public/imgs/perfil5.png" height="40" width="40"></a>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="perfilUser.php">Perfil</a>
+                        <a class="dropdown-item" href="perfilUsuario.php">Perfil</a>
                         <!-- <a class="dropdown-item" href="seleccionE.php">Editar estudiantes</a> -->
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="../../../public/index.php">Cerrar Sesión</a>
@@ -70,10 +70,8 @@ session_start();
         <div class="overlay">
             <!-- <h1 class="title">pre-proyecto</h1>  
             <h1 class="subtitle">POO: parte II</h1> -->
-
             <h1>Bienvenido, <?php echo $_SESSION['usuario']['username']; ?></h1>
             <p>Envía tus preguntas y controla su estado en esta página.</p>
-
             <hr>
             <hr>
 
@@ -145,7 +143,7 @@ session_start();
 
                 <!-- Sección izquierda con listado de preguntas -->
                 <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
-                    <h6 class="section-title mb-0">Tus preguntas</h6>
+                    <h6 class="section-title mb-0">Mis preguntas</h6>
                     <h6 class="section-subtitle mb-4">Ya enviadas y su estado</h6>
                     <br>
 
@@ -158,14 +156,6 @@ session_start();
                     // Listo quejas
                     $QuejaController->index2(); // Cambia a index2 si eso es lo que necesitas
                     ?>
-
-
-                    <!-- <form action="startPage.php" method="POST">
-                        <label for="id_usuario"><b>ID Usuario:</b></label>
-                        <input type="text" class="form-control" name="id_usuario" id="id_usuario">
-                        <br>
-                        <input type="submit" class="btn btn-primary rounded" value="Ver Preguntas">
-                    </form> -->
         
                 </div>
 
@@ -190,8 +180,6 @@ session_start();
                             <p>- RESPONDIDO: se muestra en verde.</p>
 
                             <p><b>• Ver respuestas:</b> Para ver la respuesta de una pregunta, debes de darle click encima.</p>
-
-
                         </div>
                     </div>
                 </div>

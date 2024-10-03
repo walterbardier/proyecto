@@ -58,7 +58,7 @@ class LoginController
                         <form>
                             <div class='form-row'>
                                 <div class='form-group col-12'>
-                                    <h4><b>¡Información incorrectao o usuario inexistente!</b></h4>
+                                    <h4><b>¡Información incorrecta o usuario inexistente!</b></h4>
                                 </div>
                                 <div class='form-group col-12 mb-0'>
                                     <a href='../../public/index.php'><button class='btn btn-primary rounded' input type='button' name='volver'>Volver atrás</button></a>
@@ -79,7 +79,23 @@ class LoginController
                     header('Location: ../views/administradores/startPage.php');
                     exit();
                 } else {
-                    echo "<p>El administrador no existe</p>";
+                    echo "
+                    
+                    <br><br><br>
+                    <div class='col'>
+                        <form>
+                            <div class='form-row'>
+                                <div class='form-group col-12'>
+                                    <h4><b>¡El administrador no existe!</b></h4>
+                                </div>
+                                <div class='form-group col-12 mb-0'>
+                                    <a href='../../public/index.php'><button class='btn btn-primary rounded' input type='button' name='volver'>Volver atrás</button></a>
+                                </div>                          
+                            </div>                          
+                        </form>
+                    </div>
+                    
+                    ";
                 }
             } else {
                 header('Location: ../../public/index.php');

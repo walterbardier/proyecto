@@ -168,7 +168,7 @@ a {
 }
 
 a:hover {
-  color: #f53900;
+  color: #4158b0;
   text-decoration: none;
 }
 
@@ -185,6 +185,8 @@ a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
 a:not([href]):not([tabindex]):focus {
   outline: 0;
 }
+
+
 
 pre,
 code,

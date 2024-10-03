@@ -48,29 +48,102 @@ class QuejaController
         }
     }
 
-    // lListar preguntas v2
+    // Listar preguntas con respuestas (si existen)
     public function index2(){
         $id_usuario = $_SESSION['usuario']['id_usuario'];
-        $consulta = $this->conn->prepare("SELECT * FROM preguntas WHERE id_usuario = :id_usuario;");
+    
+        $consulta = $this->conn->prepare("
+            SELECT p.id, p.texto_pregunta, p.creado_en, p.actualizado_en, p.estado, r.texto_respuesta, r.creado_en AS respuesta_creada_en
+            FROM preguntas p
+            LEFT JOIN respuestas r ON p.id = r.id_pregunta
+            WHERE p.id_usuario = :id_usuario;
+        ");
         $consulta->execute([":id_usuario" => $id_usuario]);
         $resultados = $consulta->fetchAll();
-        foreach ($resultados as $resultado){
-            echo "<a href='#' onclick=''>";
-            echo "<b>Pregunta: </b>" . $resultado['texto_pregunta'] . "<br>";
-            echo "<b>Creada en: </b>" . $resultado['creado_en'] . "<br>";
-            echo "<b>Actualizada en: </b>" . $resultado['actualizado_en'] . "<br>";
-            echo "<br>";
     
-            if ($resultado['estado'] == 'pendiente') {
-                echo "<h8><b>Estado: PENDIENTE</b></h8>";
-            } else if ($resultado['estado'] == 'respondida') {
-                echo "<h7><b>Estado: RESPONDIDA</b></h7>";
+        if (empty($resultados)) {
+            echo "<p>No has enviado preguntas aún.</p>";
+        } else {
+            foreach ($resultados as $resultado) {
+                echo "<a href='#' onclick=''>";
+                echo "<b>Pregunta: </b>" . $resultado['texto_pregunta'] . "<br>";
+                echo "<b>Creada en: </b>" . $resultado['creado_en'] . "<br>";
+                echo "<b>Actualizada en: </b>" . $resultado['actualizado_en'] . "<br>";
+                echo "<br>";
+    
+                if ($resultado['estado'] == 'pendiente') {
+                    echo "<h8><b>Estado: PENDIENTE</b></h8>";
+                } else if ($resultado['estado'] == 'respondida') {
+                    echo "<h7><b>Estado: RESPONDIDA</b></h7>";
+                }
+                echo "<br>";
+    
+                if (!empty($resultado['texto_respuesta'])) {
+                    echo "<br><b>Respuesta: </b>" . $resultado['texto_respuesta'] . "<br>";
+                    echo "<b>Respondida en: </b>" . $resultado['respuesta_creada_en'] . "<br>";
+                }
+    
+                echo "<br><br>";
+                echo "</a>";
+                echo "<hr>";
             }
-            echo "<br><br>";
-            echo "</a>";
-            echo "<hr>";
         }
     }
+    
+
+    public function index3(){
+
+        require_once("../../models/ConexionModel.php");
+        $conn = ConexionModel::getInstance()->getDatabaseInstance();
+
+        // Verificar si se ha seleccionado una categoría
+        if (isset($_GET['categoria'])) {
+            $categoria_seleccionada = $_GET['categoria'];
+
+            // Consulta para obtener las preguntas en estado 'pendiente' según la categoría seleccionada
+            $consulta = $conn->prepare("
+                SELECT p.id, p.texto_pregunta, p.creado_en, p.actualizado_en 
+                FROM preguntas p
+                JOIN relacion_pregunta_categoria rpc ON p.id = rpc.id_pregunta
+                JOIN categorias_preguntas cp ON rpc.id_categoria = cp.id
+                WHERE p.estado = 'pendiente' AND cp.nombre_categoria = :categoria
+            ");
+            $consulta->execute([":categoria" => $categoria_seleccionada]);
+
+            $resultados = $consulta->fetchAll();
+            
+            echo "<p>Resultados de la categoría: </p> <p><b>" . $categoria_seleccionada . "</b></p>" ;
+            echo "<br>";
+
+            if ($resultados) {
+                foreach ($resultados as $resultado) {
+                    echo "<br>";
+                    echo "<div>";
+                    echo "<b>Pregunta: </b>" . $resultado['texto_pregunta'] . "<br>";
+                    echo "<b>Creada en: </b>" . $resultado['creado_en'] . "<br>";
+                    // echo "<b>Actualizada en: </b>" . $resultado['actualizado_en'] . "<br>";
+                    echo "</div>";
+                    echo "<br>";
+
+                    // Botón para responder la pregunta
+                    echo "<div class='pregunta'>";
+                    echo "<form action='responderPregunta.php' method='GET'>";
+                    echo "<input type='hidden' name='id_pregunta' value='" . $resultado['id'] . "'>";
+                    echo "<button type='submit' class='btn btn-info'>Responder</button>";
+                    echo "</form>";
+                    echo "</div>";
+
+                    echo "<hr>";
+                }
+            } else {
+                echo "<p>No se encontraron preguntas pendientes para la categoría seleccionada.</p>";
+            }
+        } else {
+            echo "<p>Por favor, selecciona una categoría para buscar preguntas pendientes.</p>";
+        }
+    
+    }
+
     
 
     

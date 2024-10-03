@@ -45,17 +45,17 @@ require_once '../../controllers/QuejaController.php';
                     &#160 <!-- esto es para dejar espacio -->
 
                     <li class="nav-item">
-                    <div class="dropdown dropleft"> <!-- btn-sm PARA TAMAÑO / rounded PARA REDONDEAR // esto va en la linea de abajo -->
-                        <button class="btn btn-primary rounded dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a><img src="../../../public/imgs/perfil5.png" height="40" width="40"></a>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="perfilUser.php">Perfil</a>
-                        <!-- <a class="dropdown-item" href="seleccionE.php">Editar estudiantes</a> -->
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../../../public/index.php">Cerrar Sesión</a>
+                        <div class="dropdown dropleft"> <!-- btn-sm PARA TAMAÑO / rounded PARA REDONDEAR // esto va en la linea de abajo -->
+                            <button class="btn btn-primary rounded dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a><img src="../../../public/imgs/perfil5.png" height="40" width="40"></a>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="perfilUser.php">Perfil</a>
+                            <!-- <a class="dropdown-item" href="seleccionE.php">Editar estudiantes</a> -->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../../../public/index.php">Cerrar Sesión</a>
+                            </div>
                         </div>
-                    </div>
                     </li>
 
                 </ul>
@@ -72,8 +72,8 @@ require_once '../../controllers/QuejaController.php';
             <h1>Bienvenido, <?php echo $_SESSION['usuario']['username']; ?></h1>
             <p>Sistema de gestión de preguntas ciudadanas.</p>
             <hr><hr><hr><hr>
-
-        </div>  
+        </div>
+        
         <div class="shape">
             <svg viewBox="0 0 1500 180">
                 <path d="m 0,240 h 1500.4828 v -71.92164 c 0,0 -286.2763,-81.79324 -743.19024,-81.79324 C 300.37862,86.28512 0,168.07836 0,168.07836 Z"/>
@@ -87,26 +87,12 @@ require_once '../../controllers/QuejaController.php';
     <section class="section" id="info">
         <div class="container">
             <div class="row justify-content-between">
-
-                <!-- Sección izquierda: listado de preguntas.
-                JQUERY AJAX -->
+                <!-- Sección izquierda: Listado de preguntas -->
                 <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
                     <h6 class="section-title mb-0">Últimas preguntas pendientes</h6>
-                    <h6 class="section-subtitle mb-4">Ordenadas por categoría.</h6>
+                    <h6 class="section-subtitle mb-4">Buscar por categoría</h6>
                     <br>
-                    
-
-                    <?php
-                        require_once '../../controllers/QuejaController.php';
-
-                        // // Instancia
-                        // $QuejaController = new QuejaController();
-
-                        // // Listar quejas
-                        // $QuejaController->index();
-                    ?>
-                    
-                    
+                     
                     <form action="startPage.php" method="GET">
                         <!-- <label for="categoria">Selecciona una categoría:</label> -->
                         <div class="form-group col-sm-0">
@@ -135,62 +121,17 @@ require_once '../../controllers/QuejaController.php';
                         </div>
                         
                     </form>
-                    
 
-                    
                     <br><br>
-
+                    <!-- Lista todas las preguntas mediante la funcion index3 desde QuejaController -->
                     <?php
-                    require_once("../../models/ConexionModel.php");
-                    $conn = ConexionModel::getInstance()->getDatabaseInstance();
+                    require_once '../../controllers/QuejaController.php';
 
-                    // Verificar si se ha seleccionado una categoría
-                    if (isset($_GET['categoria'])) {
-                        $categoria_seleccionada = $_GET['categoria'];
+                    // Instancia
+                    $QuejaController = new QuejaController();
 
-                        // Consulta para obtener las preguntas en estado 'pendiente' según la categoría seleccionada
-                        $consulta = $conn->prepare("
-                            SELECT p.id, p.texto_pregunta, p.creado_en, p.actualizado_en 
-                            FROM preguntas p
-                            JOIN relacion_pregunta_categoria rpc ON p.id = rpc.id_pregunta
-                            JOIN categorias_preguntas cp ON rpc.id_categoria = cp.id
-                            WHERE p.estado = 'pendiente' AND cp.nombre_categoria = :categoria
-                        ");
-                        $consulta->execute([":categoria" => $categoria_seleccionada]);
-
-                        $resultados = $consulta->fetchAll();
-                        
-                        echo "<p>Resultados de la categoría: </p> <p><b>" . $categoria_seleccionada . "</b></p>" ;
-                        echo "<br>";
-
-                        if ($resultados) {
-                            foreach ($resultados as $resultado) {
-                                // echo "<input type='checkbox' name='' id='para javascript'>";
-                                echo "<br>";
-                                echo "<div>";
-                                echo "<b>Pregunta: </b>" . $resultado['texto_pregunta'] . "<br>";
-                                echo "<b>Creada en: </b>" . $resultado['creado_en'] . "<br>";
-                                // echo "<b>Actualizada en: </b>" . $resultado['actualizado_en'] . "<br>";
-                                echo "</div>";
-                                echo "<br>";
-
-                                foreach ($resultados as $resultado) {
-                                    echo "<div class='pregunta'>";
-                                    // Botón para responder la pregunta
-                                    echo "<form action='responderPregunta.php' method='GET'>";
-                                    echo "<input type='hidden' name='id_pregunta' value='" . $resultado['id'] . "'>";
-                                    echo "<button type='submit' class='btn btn-info '>Responder</button>";
-                                    echo "</form>";
-                                    echo "</div>";
-                                }
-                                echo "<hr>";
-                            }
-                        } else {
-                            echo "<p>No se encontraron preguntas pendientes para la categoría seleccionada.</p>";
-                        }
-                    } else {
-                        echo "<p>Por favor, selecciona una categoría para buscar preguntas pendientes.</p>";
-                    }
+                    // Listo quejas
+                    $QuejaController->index3();
                     ?>
 
                 </div>
@@ -208,14 +149,14 @@ require_once '../../controllers/QuejaController.php';
                             <br>
                             <h6><b>Información</b><br></h6>
 
-                            <p>Este es un sitio web oficial de la Intendencia de Río Negro, el cual te permite enviar tus preguntas como sugerencias, quejas o información relevante, para que sean vistas posteriormente por la Intendencia. Este es un sistema desarrollado para permitir mayor eficiencia y comunicación entre los habitantes y las autoridades.</p>
-                            <p><b>• Listado de preguntas:</b> Aquí puedes ver todas tus preguntas enviadas anteriormente y su estado específico indicando si ha sido respondida o pendiente.</p>
+                            <p>Este es un sitio web oficial de la Intendencia de Río Negro, el cual permite enviar preguntas como sugerencias, quejas o información relevante, para que sean vistas posteriormente por la Intendencia. Este es un sistema desarrollado para permitir mayor eficiencia y comunicación entre los habitantes y las autoridades.</p>
+                            <p><b>• Listado de preguntas:</b> Aquí puedes ver todas las preguntas pendientes que han sido enviadas.</p>
 
                             <p><b>• Estados:</b> Existen 2 tipos de estados: PENDIENTE o RESPONDIDO.</p>
                             <p>- PENDIENTE: se muestra en gris.</p>
                             <p>- RESPONDIDO: se muestra en verde.</p>
 
-                            <p><b>• Ver respuestas:</b> Para ver la respuesta de una pregunta, debes de darle click encima.</p>
+                            <p><b>• Responder preguntas:</b> Para ver responder una pregunta, debe darle en "Responder" a la pregunta desada.</p>
 
 
                         </div>

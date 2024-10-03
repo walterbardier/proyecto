@@ -9,8 +9,11 @@
 
    <!-- font icons -->
    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
-   <!-- Bootstrap + Steller  -->
-   <link rel="stylesheet" href="leadmark.css">
+   <!-- Bootstrap + LeadMark main styles -->
+  <link rel="stylesheet" href="assets/css/leadmark.css?v=<?php echo(rand()); ?>">
+   
+   <link rel="stylesheet" href="assets/css/leadmark.css?v=<?php echo(rand()); ?>" />
+   <!-- <script src="/js/mi_script.js?v=<?php echo(rand()); ?>"></script> -->
    
 </head>
 <body>
