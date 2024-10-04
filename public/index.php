@@ -13,8 +13,9 @@
     
     <div class="login-container">
         
-        <h2><b>Buzón Ciudadano</b></h2>
-        <img src="./imgs/RioNegro.png" alt="Río Negro" width="260" height="60" style="margin: 13px;">
+        <!-- <h2><b>Buzón Ciudadano</b></h2> -->
+        <img src="./imgs/RioNegro2.png" alt="Río Negro" width="260" height="60" style="margin: 13px;">
+        <br>
         
         <form action="../app/controllers/procesarLogin.php" method="post">
             <label for="username"><b>Nombre de Usuario</b></label>

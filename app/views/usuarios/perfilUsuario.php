@@ -105,7 +105,7 @@ session_start();
                             <input type="text" class="form-control" id="numero_telefono" name="numero_telefono" value="<?php echo $usuario['numero_telefono']; ?>">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary rounded">Guardar Cambios</button>
                     </form>
                 </div>
 
@@ -124,3 +124,61 @@ session_start();
             </div>              
         </div>
     </header>
+
+    <!-- Modal de éxito -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="successModalLabel">Actualización Exitosa</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            ¡Los datos han sido actualizados correctamente!
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        // Intercepta el envío del formulario
+        $('form').submit(function(e) {
+            e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+            var formData = $(this).serialize(); // Serializar los datos del formulario
+
+            $.ajax({
+                url: '../../controllers/actualizarPerfil.php', // Ruta del archivo PHP que procesa el formulario
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        // Si la respuesta es exitosa, mostrar el modal
+                        $('#successModal').modal('show');
+                    } else {
+                        // Si hay un error, puedes mostrar una alerta (o manejarlo como desees)
+                        alert(response.message);
+                    }
+                },
+                error: function() {
+                    alert('Hubo un error al procesar el formulario.');
+                }
+            });
+        });
+    });
+    </script>
+
+
+
+</body>

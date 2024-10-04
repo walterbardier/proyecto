@@ -26,7 +26,7 @@ require_once '../../controllers/QuejaController.php';
     <!-- page Navigation -->
     <nav class="navbar custom-navbar navbar-expand-md navbar-light fixed-top" data-spy="affix" data-offset-top="10">
         <div class="container">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="startPage.php">
                 <img src="assets/imgs/logoaqua3.png" alt="">
             </a>
             <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,9 +50,9 @@ require_once '../../controllers/QuejaController.php';
                             <a><img src="../../../public/imgs/perfil5.png" height="40" width="40"></a>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="perfilUser.php">Perfil</a>
+                            <!-- <a class="dropdown-item" href="perfilAdmin.php">Perfil</a> -->
                             <!-- <a class="dropdown-item" href="seleccionE.php">Editar estudiantes</a> -->
-                            <div class="dropdown-divider"></div>
+                            <!-- <div class="dropdown-divider"></div> -->
                             <a class="dropdown-item" href="../../../public/index.php">Cerrar Sesión</a>
                             </div>
                         </div>
