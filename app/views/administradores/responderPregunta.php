@@ -51,8 +51,15 @@ try {
 
 </head>
 <body>
-    <div class="login-container">
-        <h2>Responder a la pregunta</h2>
+    <div class="answer-container">
+        <div class="header">
+            <!-- Botón para volver atrás -->
+            <a href="javascript:history.back()">
+                <img src="../../../public/imgs/volver.png" alt="Volver" class="volver-img" width="50" height="50">
+            </a>
+            <!-- Título de la sección -->
+            <h2>Responder a la pregunta</h2>
+        </div>
 
         <!-- Mostrar la pregunta -->
         <p><b>Pregunta de <?php echo htmlspecialchars($pregunta['nombre_usuario']); ?>:
@@ -62,9 +69,9 @@ try {
         <!-- Formulario para enviar la respuesta -->
         <form action="procesarRespuesta.php" method="POST">
             <input type="hidden" name="id_pregunta" value="<?php echo $pregunta['id']; ?>">
-            <textarea name="texto_respuesta" cols="30" rows="4" class="form-control text-white rounded-0 bg-transparent" placeholder="Escribe tu respuesta aquí..."></textarea>
+            <textarea name="texto_respuesta" cols="63" rows="4" class="form-control text-white rounded-0 bg-transparent" placeholder="Escribe tu respuesta aquí..."></textarea>
             <br>
-            <button type="submit">Enviar Respuesta</button>
+            <button type="submit">Enviar respuesta</button>
         </form>
     </div>
 </body>

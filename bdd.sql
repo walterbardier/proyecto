@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS relacion_pregunta_categoria (
 );
 
 
-
 -- Insertar las categorías
 INSERT INTO categorias_preguntas (nombre_categoria) VALUES
 ('Alumbrado'),
@@ -89,3 +88,13 @@ INSERT INTO categorias_preguntas (nombre_categoria) VALUES
 ('Consultas: Trámite'),
 ('Consultas: Tributo'),
 ('Consultas: Otro');
+
+-- Crear un administrador principal
+INSERT INTO administradores (nombre_usuario, correo_electronico, contrasena, nombre_completo)
+VALUES ('admin', 'admin@example.com', 'admin', 'Administrador');
+
+
+
+-- Ejemplos de preguntas:
+-- ¿Cuándo se realizarán reparaciones en las luminarias dañadas de mi calle?
+-- Reporté una lámpara rota hace dos meses y todavía no la han arreglado. ¿Qué tan difícil es hacer mantenimiento?

@@ -105,7 +105,7 @@ session_start();
                             <input type="text" class="form-control" id="numero_telefono" name="numero_telefono" value="<?php echo $usuario['numero_telefono']; ?>">
                         </div>
 
-                        <button type="submit" class="btn btn-primary rounded">Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary rounded">Guardar cambios</button>
                     </form>
                 </div>
 

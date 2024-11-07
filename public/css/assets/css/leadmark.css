@@ -11803,7 +11803,7 @@ body::before {
 .login-container {
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 20px; /* Cambia el redondeado de los containers */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
     text-align: center;
@@ -11832,7 +11832,7 @@ body::before {
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #193961;
-    border-radius: 4px;
+    border-radius: 10px; /* Cambia el redondeado de los inputs */
     box-sizing: border-box;
 }
 
@@ -11842,7 +11842,7 @@ body::before {
     background-color: #193961;
     color: #ffffff;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px; /* Cambia el redondeado de los botones */
     cursor: pointer;
     font-size: 16px;
 }

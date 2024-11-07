@@ -18,6 +18,57 @@ session_start();
     
     <link rel="stylesheet" href="assets/css/leadmark.css?v=<?php echo(rand()); ?>" />
     <!-- <script src="/js/mi_script.js?v=<?php echo(rand()); ?>"></script> -->
+
+
+    <style>
+        /* Estilos para el modal */
+        .modal {
+            display: none; /* Ocultar por defecto */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Tamaño del modal */
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        .fade-out {
+            animation: fadeOut 0.5s forwards; /* Duración de la animación */
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1; /* Visible */
+            }
+            100% {
+                opacity: 0; /* Invisible */
+            }
+        }
+
+
+    </style>
      
 
 
@@ -54,7 +105,7 @@ session_start();
                         <a class="dropdown-item" href="perfilUsuario.php">Perfil</a>
                         <!-- <a class="dropdown-item" href="seleccionE.php">Editar estudiantes</a> -->
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../../../public/index.php">Cerrar Sesión</a>
+                        <a class="dropdown-item" href="../../../public/index.php" id="cerrarSesion">Cerrar sesión</a>
                         </div>
                     </div>
                     </li>
@@ -67,6 +118,7 @@ session_start();
     
     <!-- Page Header -->
     <header class="header">
+    <img src="../../../public/imgs/fondo2.png" alt="Fondo" />
         <div class="overlay">
             <!-- <h1 class="title">pre-proyecto</h1>  
             <h1 class="subtitle">POO: parte II</h1> -->
@@ -91,6 +143,9 @@ session_start();
                             <option>Young</option>
                             <option>Nuevo Berlín</option>
                             <option>San Javier</option>
+                            <option>Las Cañas</option>
+                            <option>Algorta</option>
+                            <option>Otra</option>
                         </select>
                     </div>
                     <div class="form-group col-sm-4">
@@ -172,7 +227,10 @@ session_start();
                             <br>
                             <h6><b>Información</b><br></h6>
 
-                            <p>Este es un sitio web oficial de la Intendencia de Río Negro, el cual te permite enviar tus preguntas como sugerencias, quejas o información relevante, para que sean vistas posteriormente por la Intendencia. Este es un sistema desarrollado para permitir mayor eficiencia y comunicación entre los habitantes y las autoridades.</p>
+                            <p>Este es un sitio web oficial de la Intendencia de Río Negro, diseñado para permitir a los ciudadanos enviar preguntas, sugerencias, quejas o información relevante, las cuales serán revisadas por la Intendencia. Este sistema ha sido desarrollado para mejorar la eficiencia y la comunicación entre los habitantes y las autoridades.</p>
+                            <p>Como usuario, tienes la posibilidad de enviarnos tus preguntas a través del formulario ubicado en la parte superior. Deberás seleccionar una categoría que se ajuste a tu necesidad y proporcionar el texto detallando tu consulta.</p>
+                            <hr>
+                            
                             <p><b>• Listado de preguntas:</b> Aquí puedes ver todas tus preguntas enviadas anteriormente y su estado específico indicando si ha sido respondida o pendiente.</p>
 
                             <p><b>• Estados:</b> Existen 2 tipos de estados: PENDIENTE o RESPONDIDO.</p>
@@ -202,10 +260,10 @@ session_start();
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center mb-3">
-                                <img class="mr-3" src="assets/imgs/walt.jpg" alt="">
+                                <img class="mr-3" src="../../../public/imgs/walt2.jpg" alt="">
                                 <div class="media-body">
                                     <h6 class="mt-1 mb-0">Walter Bardier</h6>
-                                    <small class="text-muted mb-0">programación, documentación y testing</small>      
+                                    <small class="text-muted mb-0">Programador y diseñador</small>      
                                 </div>
                             </div>
                             
@@ -217,10 +275,10 @@ session_start();
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center mb-3">
-                                <img class="mr-3" src="assets/imgs/lu.jpg" alt="">
+                                <img class="mr-3" src="../../../public/imgs/lu2.jpg" alt="">
                                 <div class="media-body">
                                     <h6 class="mt-1 mb-0">Lucía Stagi</h6>
-                                    <small class="text-muted mb-0">programación, documentación y testing</small>      
+                                    <small class="text-muted mb-0">Documentación y testing</small>      
                                 </div>
                             </div>
                             
@@ -246,7 +304,7 @@ session_start();
                     <p class="mb-4">2110 Space Club, The Moon</p>
 
                     <h6 class="mb-0">Email</h6>
-                    <p class="mb-0">info@website.com</p>
+                    <p class="mb-0">info@rionegroconectado.com</p>
                     <p></p>
                 </div>
                 <div class="col-md-7">
@@ -275,7 +333,7 @@ session_start();
             </div>
             <!-- Page Footer -->
             <footer class="mt-5 py-4 border-top border-secondary">
-                <p class="mb-0 small">&copy; <script>document.write(new Date().getFullYear())</script>, Design By <a href="" target="_blank">Walter Bardier.</a>  All rights reserved </p>   
+                <p class="mb-0 small">&copy; <script>document.write(new Date().getFullYear())</script>, Created By <a href="" target="_blank">Walter Bardier.</a>  All rights reserved.</p>   
                 
             </footer>
             <!-- End of Page Footer -->  
@@ -294,6 +352,55 @@ session_start();
 
     <!-- LeadMark js -->
     <script src="assets/js/leadmark.js"></script>
+
+
+    <!-- Scrips para el movimiento del header -->
+    <script>
+        const header = document.querySelector('.header');
+        const img = header.querySelector('img'); // Asegúrate de que la imagen esté en el header
+
+        header.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { clientWidth, clientHeight } = header;
+            
+            // Calcular el movimiento en relación al centro del header
+            const x = (clientX / clientWidth) - 0.5; // Normalizado entre -0.5 y 0.5
+            const y = (clientY / clientHeight) - 0.5; // Normalizado entre -0.5 y 0.5
+            
+            // Aplicar la transformación 3D
+            img.style.transform = `translateX(-50%) translateZ(-50px) rotateY(${x * 20}deg) rotateX(${-y * 20}deg)`;
+        });
+    </script>
+
+    <script>
+    window.addEventListener('scroll', function() {
+        const img = document.querySelector('.header img');
+        const scrollY = window.scrollY; // Obtiene la posición de desplazamiento vertical
+
+        // Ajusta el valor de translateY para mover la imagen según el scroll
+        const translateValue = scrollY * 0.2; // Cambia 0.2 para más o menos movimiento
+        img.style.transform = `translateX(-50%) translateY(-${translateValue}px)`;
+    });
+    </script>
+
+
+    <script>
+        document.getElementById('cerrarSesion').addEventListener('click', function(e) {
+            e.preventDefault(); // Evita la acción predeterminada del enlace
+            const body = document.body;
+
+            // Añade la clase de animación
+            body.classList.add('fade-out');
+
+            // Espera a que termine la animación antes de redirigir
+            setTimeout(function() {
+                window.location.href = '../../../public/index.php'; // Redirige a index.php
+            }, 500); // El tiempo debe coincidir con la duración de la animación
+        });
+    </script>
+
+
+
 
 </body>
 </html>

@@ -20,6 +20,19 @@ require_once '../../controllers/QuejaController.php';
     <link rel="stylesheet" href="assets/css/leadmark.css?v=<?php echo(rand()); ?>" />
     <!-- <script src="/js/mi_script.js?v=<?php echo(rand()); ?>"></script> -->
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('filtrosBtn').addEventListener('click', function() {
+                var buscador = document.getElementById('buscadorFiltros');
+                if (buscador.style.display === 'none') {
+                    buscador.style.display = 'block';
+                } else {
+                    buscador.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     
@@ -53,7 +66,7 @@ require_once '../../controllers/QuejaController.php';
                             <!-- <a class="dropdown-item" href="perfilAdmin.php">Perfil</a> -->
                             <!-- <a class="dropdown-item" href="seleccionE.php">Editar estudiantes</a> -->
                             <!-- <div class="dropdown-divider"></div> -->
-                            <a class="dropdown-item" href="../../../public/index.php">Cerrar Sesión</a>
+                            <a class="dropdown-item" href="../../../public/index.php">Cerrar sesión</a>
                             </div>
                         </div>
                     </li>
@@ -66,6 +79,7 @@ require_once '../../controllers/QuejaController.php';
     
     <!-- Page Header -->
     <header class="header">
+    <img src="../../../public/imgs/fondo2.png" alt="Fondo" />
         <div class="overlay">
             <!-- <h1 class="title">pre-proyecto</h1>  
             <h1 class="subtitle">POO: parte II</h1> -->
@@ -92,46 +106,59 @@ require_once '../../controllers/QuejaController.php';
                     <h6 class="section-title mb-0">Últimas preguntas pendientes</h6>
                     <h6 class="section-subtitle mb-4">Buscar por categoría</h6>
                     <br>
-                     
-                    <form action="startPage.php" method="GET">
-                        <!-- <label for="categoria">Selecciona una categoría:</label> -->
-                        <div class="form-group col-sm-0">
-                            <select class="form-control" id="categoria" name="categoria">
-                                <option value="Alumbrado">Alumbrado</option>
-                                <option value="Arbolado">Arbolado</option>
-                                <option value="Plantacion">Plantación</option>
-                                <option value="Acoso sexual">Acoso sexual</option>
-                                <option value="Limpieza de grafittis">Limpieza de grafittis</option>
-                                <option value="Estado de los contenedores">Estado de los contenedores</option>
-                                <option value="Problema de limpieza">Problema de limpieza</option>
-                                <option value="Solicitud de retiro de poda, escombros o residuos">Solicitud de poda, escombros o residuos</option>
-                                <option value="Saneamiento: Bocas de tormenta">Saneamiento: Bocas de tormenta</option>
-                                <option value="Saneamiento: Conexiones y Colectores">Saneamiento: Conexiones y Colectores</option>
-                                <option value="Tránsito: Semáforos">Tránsito: Semáforos</option>
-                                <option value="Tránsito: Señalización">Tránsito: Señalización</option>
-                                <option value="Quejas">Quejas</option>
-                                <option value="Consultas: Trámite">Consultas: Trámite</option>
-                                <option value="Consultas: Tributo">Consultas: Tributo</option>
-                                <option value="Consultas: Otro">Consultas: Otro</option>
-                            </select>
+
+                    <form action="startPage.php" method="GET" class="d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div class="form-group col-sm-9">
+                                <select class="form-control" id="categoria" name="categoria">
+                                    <option value="Alumbrado">Alumbrado</option>
+                                    <option value="Arbolado">Arbolado</option>
+                                    <option value="Plantacion">Plantación</option>
+                                    <option value="Acoso sexual">Acoso sexual</option>
+                                    <option value="Limpieza de grafittis">Limpieza de grafittis</option>
+                                    <option value="Estado de los contenedores">Estado de los contenedores</option>
+                                    <option value="Problema de limpieza">Problema de limpieza</option>
+                                    <option value="Solicitud de retiro de poda, escombros o residuos">Solicitud de poda, escombros o residuos</option>
+                                    <option value="Saneamiento: Bocas de tormenta">Saneamiento: Bocas de tormenta</option>
+                                    <option value="Saneamiento: Conexiones y Colectores">Saneamiento: Conexiones y Colectores</option>
+                                    <option value="Tránsito: Semáforos">Tránsito: Semáforos</option>
+                                    <option value="Tránsito: Señalización">Tránsito: Señalización</option>
+                                    <option value="Quejas">Quejas</option>
+                                    <option value="Consultas: Trámite">Consultas: Trámite</option>
+                                    <option value="Consultas: Tributo">Consultas: Tributo</option>
+                                    <option value="Consultas: Otro">Consultas: Otro</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group d-flex justify-content-end align-items-center">
+                                <input class="btn btn-primary rounded w-md" type="submit" value="Buscar"> 
+                            </div>
+
+                            <div class="form-group d-flex justify-content-end align-items-center">
+                                <!-- Botón redondo con la imagen de filtros -->
+                                <button type="button" class="btn btn-primary rounded-circle ml-2" id="filtrosBtn" style="background-image: url('../../../public/imgs/filtros2.png'); background-size: cover; width: 40px; height: 40px; border: none;"></button>
+                            </div>
                         </div>
-                        
-                        <div class="form-group col-sm-0">
-                            <input class="btn btn-primary rounded w-md mt-3" type="submit" value="Buscar">
+
+                        <!-- Contenedor del buscador de palabras clave en una nueva fila -->
+                        <div id="buscadorFiltros" class="w-100" style="display: none; margin-top: 20px;">
+                            <div class="form-group col-sm-12">
+                                <input type="text" name="palabra_clave" class="form-control" placeholder="Filtrar (por ciudad, nombre completo, usuario, fecha, correo, etc)">
+                            </div>   
                         </div>
-                        
                     </form>
+
 
                     <br><br>
                     <!-- Lista todas las preguntas mediante la funcion index3 desde QuejaController -->
                     <?php
                     require_once '../../controllers/QuejaController.php';
 
-                    // Instancia
-                    $QuejaController = new QuejaController();
-
-                    // Listo quejas
-                    $QuejaController->index3();
+                    $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
+                    $palabra_clave = isset($_GET['palabra_clave']) ? $_GET['palabra_clave'] : '';
+                    
+                    $quejaController = new QuejaController();
+                    $resultados = $quejaController->index3();
                     ?>
 
                 </div>
@@ -149,14 +176,16 @@ require_once '../../controllers/QuejaController.php';
                             <br>
                             <h6><b>Información</b><br></h6>
 
-                            <p>Este es un sitio web oficial de la Intendencia de Río Negro, el cual permite enviar preguntas como sugerencias, quejas o información relevante, para que sean vistas posteriormente por la Intendencia. Este es un sistema desarrollado para permitir mayor eficiencia y comunicación entre los habitantes y las autoridades.</p>
-                            <p><b>• Listado de preguntas:</b> Aquí puedes ver todas las preguntas pendientes que han sido enviadas.</p>
+                            <p>Este es un sitio web oficial de la Intendencia de Río Negro, diseñado para permitir a los ciudadanos enviar preguntas, sugerencias, quejas o información relevante, las cuales serán revisadas por la Intendencia. Este sistema ha sido desarrollado para mejorar la eficiencia y la comunicación entre los habitantes y las autoridades.</p>
+                            <p>Como administrador, tendrás la capacidad de visualizar las preguntas en estado PENDIENTE enviadas anteriormente por los usuarios, lo que te permitirá responderlas adecuadamente.</p>
+                            <hr>
 
+                            <p><b>• Filtros:</b> Esta función te permitirá buscar resultados específicos basados en datos tales como: ciudad, nombre completo, nombre de usuario, fecha de envío y correo electrónico del usuario.</p>
                             <p><b>• Estados:</b> Existen 2 tipos de estados: PENDIENTE o RESPONDIDO.</p>
                             <p>- PENDIENTE: se muestra en gris.</p>
                             <p>- RESPONDIDO: se muestra en verde.</p>
 
-                            <p><b>• Responder preguntas:</b> Para ver responder una pregunta, debe darle en "Responder" a la pregunta desada.</p>
+                            <p><b>• Responder preguntas:</b> En el listado ubicado en el lateral izquierdo, podrás consultar las preguntas pendientes. Para responder, simplemente haz clic en "Responder" junto a la pregunta deseada.</p>
 
 
                         </div>
@@ -181,10 +210,10 @@ require_once '../../controllers/QuejaController.php';
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center mb-3">
-                                <img class="mr-3" src="assets/imgs/walt.jpg" alt="">
+                                <img class="mr-3" src="../../../public/imgs/walt2.jpg" alt="">
                                 <div class="media-body">
                                     <h6 class="mt-1 mb-0">Walter Bardier</h6>
-                                    <small class="text-muted mb-0">programación, documentación y testing</small>      
+                                    <small class="text-muted mb-0">Programador y diseñador</small>      
                                 </div>
                             </div>
                             
@@ -196,10 +225,10 @@ require_once '../../controllers/QuejaController.php';
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center mb-3">
-                                <img class="mr-3" src="assets/imgs/lu.jpg" alt="">
+                                <img class="mr-3" src="../../../public/imgs/lu2.jpg" alt="">
                                 <div class="media-body">
                                     <h6 class="mt-1 mb-0">Lucía Stagi</h6>
-                                    <small class="text-muted mb-0">programación, documentación y testing</small>      
+                                    <small class="text-muted mb-0">Documentación y testing</small>      
                                 </div>
                             </div>
                             
@@ -225,7 +254,7 @@ require_once '../../controllers/QuejaController.php';
                     <p class="mb-4">2110 Space Club, The Moon</p>
 
                     <h6 class="mb-0">Email</h6>
-                    <p class="mb-0">info@website.com</p>
+                    <p class="mb-0">info@rionegroconectado.com</p>
                     <p></p>
                 </div>
                 <div class="col-md-7">
@@ -254,7 +283,7 @@ require_once '../../controllers/QuejaController.php';
             </div>
             <!-- Page Footer -->
             <footer class="mt-5 py-4 border-top border-secondary">
-                <p class="mb-0 small">&copy; <script>document.write(new Date().getFullYear())</script>, Design By <a href="" target="_blank">Walter Bardier.</a>  All rights reserved </p>   
+                <p class="mb-0 small">&copy; <script>document.write(new Date().getFullYear())</script>, Created By <a href="" target="_blank">Walter Bardier.</a>  All rights reserved.</p>   
                 
             </footer>
             <!-- End of Page Footer -->  
@@ -273,6 +302,36 @@ require_once '../../controllers/QuejaController.php';
 
     <!-- LeadMark js -->
     <script src="assets/js/leadmark.js"></script>
+
+
+    <!-- Scrips para el movimiento del header -->
+    <script>
+        const header = document.querySelector('.header');
+        const img = header.querySelector('img'); // Asegúrate de que la imagen esté en el header
+
+        header.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { clientWidth, clientHeight } = header;
+            
+            // Calcular el movimiento en relación al centro del header
+            const x = (clientX / clientWidth) - 0.5; // Normalizado entre -0.5 y 0.5
+            const y = (clientY / clientHeight) - 0.5; // Normalizado entre -0.5 y 0.5
+            
+            // Aplicar la transformación 3D
+            img.style.transform = `translateX(-50%) translateZ(-50px) rotateY(${x * 20}deg) rotateX(${-y * 20}deg)`;
+        });
+    </script>
+
+    <script>
+    window.addEventListener('scroll', function() {
+        const img = document.querySelector('.header img');
+        const scrollY = window.scrollY; // Obtiene la posición de desplazamiento vertical
+
+        // Ajusta el valor de translateY para mover la imagen según el scroll
+        const translateValue = scrollY * 0.2; // Cambia 0.2 para más o menos movimiento
+        img.style.transform = `translateX(-50%) translateY(-${translateValue}px)`;
+    });
+    </script>
 
 </body>
 </html>

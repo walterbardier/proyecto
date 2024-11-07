@@ -33,7 +33,7 @@ body::before {
 .login-container {
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 20px; /* Cambia el redondeado de los containers */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
     text-align: center;
@@ -64,7 +64,7 @@ body::before {
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #193961;
-    border-radius: 4px;
+    border-radius: 10px; /* Cambia el redondeado de los inputs */
     box-sizing: border-box;
 }
 
@@ -74,7 +74,7 @@ body::before {
     background-color: #193961;
     color: #ffffff;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px; /* Cambia el redondeado de los botones */
     cursor: pointer;
     font-size: 16px;
 }
@@ -82,6 +82,85 @@ body::before {
 .login-container button:hover {
     background-color: #193961;
 }
+
+
+/* Configuración del div de la ventana de responder preguntas */
+
+.answer-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px; /* Cambia el redondeado de los containers */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 600px; /* Aumenta el ancho del contenedor */
+    text-align: center;
+}
+
+.answer-container h1 {
+    color: #193961; /* Celeste oscuro */
+    margin-bottom: 10px;
+    font-size: 50px;
+}
+
+.answer-container h2 {
+    color: #000000;
+    margin-bottom: 1px;
+    font-size: 28px;
+}
+
+.answer-container label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #193961;
+    font-size: 18px;
+}
+
+.answer-container input,
+.answer-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #193961;
+    border-radius: 10px; /* Cambia el redondeado de los inputs */
+    box-sizing: border-box;
+}
+
+.answer-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #193961;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px; /* Cambia el redondeado de los botones */
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.answer-container button:hover {
+    background-color: #193961;
+}
+
+
+.answer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  align-items: center; /* Alinea verticalmente el botón y el título */
+  justify-content: center; /* Centra horizontalmente */
+  gap: 10px; /* Espacio entre el botón de volver y el título */
+  margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+/* .volver-img {
+  width: 30px; 
+  cursor: pointer;
+  margin-top: 4px;
+} */
+
+
 
 
 .form-control {

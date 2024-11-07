@@ -48,26 +48,9 @@ class LoginController
     
                 if ($resultados && $password == $resultados['contrasena']) {
                     $_SESSION['usuario'] = ["username" => $nombre, "role" => $role, "id_usuario" => $resultados['id']];
-                    header('Location: ../views/usuarios/startPage.php');
-                    exit();
+                    return ["success" => true, "redirect" => "../app/views/usuarios/startPage.php"];
                 } else {
-                    echo "
-                    
-                    <br><br><br>
-                    <div class='col'>
-                        <form>
-                            <div class='form-row'>
-                                <div class='form-group col-12'>
-                                    <h4><b>¡Información incorrecta o usuario inexistente!</b></h4>
-                                </div>
-                                <div class='form-group col-12 mb-0'>
-                                    <a href='../../public/index.php'><button class='btn btn-primary rounded' input type='button' name='volver'>Volver atrás</button></a>
-                                </div>                          
-                            </div>                          
-                        </form>
-                    </div>
-                
-                ";
+                    return ["success" => false, "message" => "¡Información incorrecta o usuario inexistente!"];
                 }
             } elseif ($role == "administrador") {
                 $consulta = $this->conn->prepare("SELECT contrasena FROM administradores WHERE nombre_usuario = :nombre;");
@@ -76,36 +59,18 @@ class LoginController
     
                 if ($resultados && $password == $resultados['contrasena']) {
                     $_SESSION['usuario'] = ["username" => $nombre, "role" => $role];
-                    header('Location: ../views/administradores/startPage.php');
-                    exit();
+                    return ["success" => true, "redirect" => "../app/views/administradores/startPage.php"];
                 } else {
-                    echo "
-                    
-                    <br><br><br>
-                    <div class='col'>
-                        <form>
-                            <div class='form-row'>
-                                <div class='form-group col-12'>
-                                    <h4><b>¡El administrador no existe!</b></h4>
-                                </div>
-                                <div class='form-group col-12 mb-0'>
-                                    <a href='../../public/index.php'><button class='btn btn-primary rounded' input type='button' name='volver'>Volver atrás</button></a>
-                                </div>                          
-                            </div>                          
-                        </form>
-                    </div>
-                    
-                    ";
+                    return ["success" => false, "message" => "¡El administrador no existe!"];
                 }
             } else {
-                header('Location: ../../public/index.php');
-                exit();
+                return ["success" => false, "message" => "¡Rol no válido!"];
             }
         } catch (PDOException $e) {
-            $error = $e->getMessage();
-            require_once("../app/exceptions/error.php");
+            return ["success" => false, "message" => $e->getMessage()];
         }
     }
+    
     
 
     /**

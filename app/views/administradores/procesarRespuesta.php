@@ -62,7 +62,7 @@
                         <div class='form-row'>
                             <div class='form-group col-12'>
                                 <br><br>
-                                <h4><b>Respuesta enviada con éxito! :)</b></h4>
+                                <h4><b>¡Respuesta enviada con éxito! :)</b></h4>
                             </div>
                             <div class='form-group col-12 mb-0'>
                                 <a href='./startPage.php'><button class='btn btn-primary rounded' input type='button' name='volver'>Volver atrás</button></a>
